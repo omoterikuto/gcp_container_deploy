@@ -16,5 +16,5 @@ func main() {
 }
 
 func test(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "container deploy is successed!")
+	fmt.Fprintf(w, "container deploy is successed!!")
 }
