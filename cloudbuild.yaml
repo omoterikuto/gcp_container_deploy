@@ -1,38 +1,34 @@
-#steps:
-#  # Docker Build
-#  - name: "gcr.io/cloud-builders/docker"
-#    args: ["build", "-t", "${_IMAGE_NAME}", "."]
-#  # Docker push to Artifact Registry
-#  - name: "gcr.io/cloud-builders/docker"
-#    args: ["push", "${_IMAGE_NAME}"]
-#  # Deploy to Cloud Run
-#  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
-#    entrypoint: gcloud
-#    args:
-#      [
-#        "run",
-#        "deploy",
-#        "${_BASE_NAME}",
-#        "--image",
-#        "${_IMAGE_NAME}",
-#        "--region",
-#        "asia-northeast1",
-#        "--platform",
-#        "managed",
-#        "--allow-unauthenticated",
-#      ]
-#
-## デフォルトは10分。今回は30分にしてみる
-#timeout: "60s"
-#
-## ユーザー定義変数
-#substitutions:
-#  _SERVICE_NAME: "container-deploy"
-#  _IMAGE_NAME: "${PROJECT_ID}/${TRIGGER_NAME}/${_BASE_NAME}:${SHORT_SHA}"
-#
-#images:
-#  - "${_IMAGE_NAME}"
-
 steps:
-  - name: "bash"
-    args: ["echo", "Hello, World"]
+  # Docker Build
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "${_IMAGE_NAME}", "."]
+  # Docker push to Artifact Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "${_IMAGE_NAME}"]
+  # Deploy to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+        "deploy",
+        "${_BASE_NAME}",
+        "--image",
+        "${_IMAGE_NAME}",
+        "--region",
+        "asia-northeast1",
+        "--platform",
+        "managed",
+        "--allow-unauthenticated",
+      ]
+
+# デフォルトは10分。今回は30分にしてみる
+timeout: "60s"
+
+# ユーザー定義変数
+substitutions:
+  _SERVICE_NAME: "container-deploy"
+  _IMAGE_NAME: "${PROJECT_ID}/${TRIGGER_NAME}/${_BASE_NAME}:${SHORT_SHA}"
+
+images:
+  - "${_IMAGE_NAME}"
