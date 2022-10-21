@@ -25,7 +25,7 @@ steps:
 # デフォルトは10分。今回は30分にしてみる
 timeout: "1800s"
 
-# ユーザー定義変数a
+# ユーザー定義変数
 substitutions:
   _SERVICE_NAME: "container-deploy"
   _IMAGE_NAME: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/${TRIGGER_NAME}/${_BASE_NAME}:${SHORT_SHA}"
