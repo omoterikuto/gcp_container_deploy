@@ -8,10 +8,11 @@ import (
 
 func main() {
 	http.HandleFunc("/", test)
-	err := http.ListenAndServe(":80", nil)
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
+	fmt.Println("start server")
 }
 
 func test(w http.ResponseWriter, r *http.Request) {
