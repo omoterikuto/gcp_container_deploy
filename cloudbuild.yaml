@@ -33,7 +33,7 @@ timeout: "60s"
 # ユーザー定義変数
 substitutions:
   _SERVICE_NAME: "container-deploy"
-  _IMAGE_NAME: "$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"
+  _IMAGE_NAME: "${PROJECT_ID}/${REPO_NAME}:{$COMMIT_SHA}"
 
 images:
   - "${_IMAGE_NAME}"
