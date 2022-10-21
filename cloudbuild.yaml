@@ -1,7 +1,12 @@
 steps:
   # Docker Build
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "${_IMAGE_NAME}", "."]
+    args:
+      - build
+      - '--no-cache'
+      - '-t'
+      - "${_IMAGE_NAME}"
+      - .
   # Docker push to Artifact Registry
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "${_IMAGE_NAME}"]
