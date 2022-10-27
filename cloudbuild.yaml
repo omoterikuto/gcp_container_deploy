@@ -1,14 +1,13 @@
 steps:
-  # Docker Build
+  # build
   - name: "gcr.io/cloud-builders/docker"
     args:
       [ 'build', '-t', '${_IMAGE_NAME}', '.' ]
-  # Docker push to Artifact Registry
+  # push
   - name: "gcr.io/cloud-builders/docker"
     args:
-    - push
-    - "${_IMAGE_NAME}"
-  # Deploy to Cloud Run
+      ["push", "${_IMAGE_NAME}"]
+  # deploy
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
     entrypoint: gcloud
     args:
@@ -25,7 +24,6 @@ steps:
         "--allow-unauthenticated",
       ]
 
-# ユーザー定義変数
 substitutions:
   _SERVICE_NAME: "container-deploy"
   _IMAGE_NAME: "asia.gcr.io/btc-trade-330602/test/${SHORT_SHA}"
