@@ -2,11 +2,7 @@ steps:
   # Docker Build
   - name: "gcr.io/cloud-builders/docker"
     args:
-      - build
-      - '--no-cache'
-      - '-t'
-      - "${_IMAGE_NAME}"
-      - .
+      [ 'build', '-t', '${_IMAGE_NAME}', '.' ]
   # Docker push to Artifact Registry
   - name: "gcr.io/cloud-builders/docker"
     args:
@@ -35,7 +31,7 @@ timeout: "60s"
 # ユーザー定義変数
 substitutions:
   _SERVICE_NAME: "container-deploy"
-  _IMAGE_NAME: "asia.gcr.io/btc-trade-330602:${SHORT_SHA}"
+  _IMAGE_NAME: "asia.gcr.io/btc-trade-330602/test/${SHORT_SHA}"
 
 images:
   - "${_IMAGE_NAME}"
