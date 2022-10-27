@@ -25,9 +25,6 @@ steps:
         "--allow-unauthenticated",
       ]
 
-# デフォルトは10分。今回は30分にしてみる
-timeout: "120s"
-
 # ユーザー定義変数
 substitutions:
   _SERVICE_NAME: "container-deploy"
